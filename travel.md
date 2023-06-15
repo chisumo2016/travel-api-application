@@ -92,3 +92,24 @@
         php artisan migrate:fresh 
     - DBDEAVER - ER DIAGRAM
         https://dbeaver.io/download/
+
+
+## PART B
+    - php artisan make:controller Api/V1/TravelController
+    - Client doesnt want to know created_at oor updated_at 
+    - To use API resources
+        php artisan make:resource TravelResource
+    -  call the resource  inside the TravelControllerr
+    - As sooner on feeature is finishhed Test the applicaction PHP UNIT (AUTOMATED TEST) or PEST
+        .  Delete the test inside the 
+                tests/Feature/ExampleTest.php
+                tests/Unit/ExampleTest.php
+        . Let start create  test for Travel endpoint
+            php artisan make:test TravelListTest     -----> Featured 
+    - Setup the phpunit.xml
+            <env name="DB_CONNECTION" value="sqlite"/>
+           <env name="DB_DATABASE" value=":memory:"/>
+
+
+    - Create Fatory for Model Travel
+        php artisan make:factory TravelFactory --model=Travel
