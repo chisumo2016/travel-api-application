@@ -69,3 +69,26 @@
         }
         
         > $travel->number_of_nights
+
+    - php artisan make:model Tour -m
+    - Add the accessor 
+    - Add the mass assigment
+    - convert the id to uuid
+        $table->uuid('id')->primary();
+    - channge the foreign key to uuid as well
+        $table->foreignId('travel_id')->constrained('travels');
+                TO
+         $table->foreignUuid('travel_id')->constrained('travels');
+
+    - CHANGE in person_access_tokenn
+        $table->morphs('tokenable'); //USER ID
+        TO
+        $table->uuidMorphs('tokenable'); //USER ID
+
+    - Add the traits in all model associate with uuid
+        use Illuminate\Database\Eloquent\Concerns\HasUuids;
+        use HasUuids;
+    - FRESH MIGRATION
+        php artisan migrate:fresh 
+    - DBDEAVER - ER DIAGRAM
+        https://dbeaver.io/download/
