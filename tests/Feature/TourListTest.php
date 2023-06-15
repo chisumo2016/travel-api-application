@@ -15,8 +15,8 @@ class TourListTest extends TestCase
 
     public function test_tours_list_by_travel_slug_return_correct_tours(): void
     {
-        $travel =   Travel::factory()->create();
-        $tour =     Tour::factory()->create(['travel_id' => $travel->id]);
+        $travel = Travel::factory()->create();
+        $tour   = Tour::factory()->create(['travel_id' => $travel->id]);
 
 
         $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours');
@@ -28,10 +28,10 @@ class TourListTest extends TestCase
 
     public  function test_tour_price_is_shown_correctly():void
     {
-        $travel =   Travel::factory()->create();
+        $travel = Travel::factory()->create();
         Tour::factory()->create([
-            'travel__id' => $travel->id,
-            'price' => 123.45
+            'travel_id' => $travel->id,
+            'price' => 123.45,
         ]);
 
         $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours');
@@ -43,9 +43,8 @@ class TourListTest extends TestCase
 
     public  function test_tours_list_returns_pagination():void
     {
-
-        $travel =   Travel::factory()->create();
-        Tour::factory(16 )->create(['travel_id' => $travel->id]);
+        $travel = Travel::factory()->create();
+        Tour::factory(16)->create(['travel_id' => $travel->id]);
 
         $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours');
 

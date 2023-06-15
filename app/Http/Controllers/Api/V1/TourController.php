@@ -11,6 +11,7 @@ class TourController extends Controller
 {
     public  function  index(Travel $travel)
     {
+
           $tours =  $travel->tours()
               ->orderBy('start_date')
               ->paginate();
