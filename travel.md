@@ -94,7 +94,9 @@
         https://dbeaver.io/download/
 
 
-## PART B
+## PART B  
+    Public Endpoint for Travels with Tests
+
     - php artisan make:controller Api/V1/TravelController
     - Client doesnt want to know created_at oor updated_at 
     - To use API resources
@@ -113,3 +115,60 @@
 
     - Create Fatory for Model Travel
         php artisan make:factory TravelFactory --model=Travel
+        php artisan test
+
+
+    Public Endpoint for Tours with Tests 
+        Route::get('travels/{travels}/tours', [TourController::class, 'index']);
+        /api/v1/travels/[travels.id]/tours
+        php artisan make:controller Api/V1/TourController
+        php artisan make:resource TourResource
+
+    - Test api 
+            http://travel-api.test/api/v1/travels/some-thing/tours
+            . Implemented Slug
+                     public  function  getRouteKeyName(): string
+                        {
+                            return 'slug';
+                        }
+            . web routte will
+                    Route::get('travels/{travels}/tours', [TourController::class, 'index']);
+            . TourController
+                return Tour::where('travel_id', $travels->id)->orderBy('starting_date')->get() ;
+            .We have relationnship we caan use it
+                     public  function  index(Travel $travel)
+                        {
+                              return $travel->tours()
+                                  ->orderBy('starting_date')
+                                  ->get() ;
+                        }
+    - Return some fields in resource
+    - Test API
+
+    - To write the PHP UNIT TEST
+        . php artisan make:test TourListTest
+        .Write all test
+    - Create a TourFactory
+        php artisan make:factory TourFactory --model=Tour
+    - 
+            public  function test_tours_list_returns_pagination():void
+            {
+                $toursPerPage = config('app.paginationPerPage.tours');
+        
+                $travel =   Travel::factory()->create();
+                Tour::factory($toursPerPage +1 )->create(['travel__id' => $travel->id]);
+        
+                $response = $this->get('/api/v1/travels/'.$travel->slug.'/tours');
+        
+                $response->assertStatus(200);
+                $response->assertJsonCount(1, 'data');
+                $response->assertJsonPath('meta.current_page', 1);
+            }
+    - Old version
+        
+
+                    
+
+        
+
+    
