@@ -196,12 +196,35 @@
     - Launch
         php artisan db:seed --class=RoleSeeder
 
+## Admin Endpoint to create Travel
+    - Create the controller
+                php artisan make:controller Api/V1/Admin/TravelController
+    - create the route group with prefix admin
+            Route::prefix('admin')->group(function () {
+    
+            Route::put('travels/{travel}', [\App\Http\Controllers\Api\V1\Admin\TravelController::class, 'update']);
+        });
+    - Travel Request validation
+        php artisan make:request TravelRequest
+    - TEST API
+        POST:  http://travel-api.test/api/v1/admin/travels 
+    - add two middlware auth and role admin
+        ->middleware(['auth:sanctum']) will be powwered api token
+    - Generate the LoginController
+                php artisan make:controller Api/V1/Auth/LoginController --invokable
+                
+    - Add the route api 
+        Route::post('login', LoginController::class);
+    - Generat e the form request class
+        php artisan make:request LoginRequest
 
-
-
-
-
-
+    - Create Role Middle
+        php artisan make:middleware RoleMiddlware
+    - Register the middleware in kernel 
+    - Testing the applicaation
+    - Create PHP UNIT Test
+        php artisan make:test LoginTest
+        php artisan make:test AdminTest
 
 
 
