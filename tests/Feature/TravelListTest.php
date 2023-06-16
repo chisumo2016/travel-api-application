@@ -15,8 +15,7 @@ class TravelListTest extends TestCase
     public function test_travels_list_returns_paginated_data_correctly(): void
     {
         Travel::factory(16)->create(['is_public' => true]);
-
-
+        
         $response = $this->get('/api/v1/travels');
 
         $response->assertStatus(200);
@@ -28,7 +27,6 @@ class TravelListTest extends TestCase
     {
         $publicTravel = Travel::factory()->create(['is_public' => true]);
         Travel::factory()->create(['is_public' => false]);
-
 
         $response = $this->get('/api/v1/travels');
 
