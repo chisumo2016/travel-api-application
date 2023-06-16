@@ -3,27 +3,15 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ToursListRequest;
 use App\Http\Resources\TourResource;
 use App\Models\Travel;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+
 
 class TourController extends Controller
 {
-    public  function  index(Travel $travel, Request $request)
+    public  function  index(Travel $travel,ToursListRequest $request)
     {
-         $request->validate([
-             'priceFrom'    => 'numeric',
-             'priceTo'      => 'numeric',
-             'dateFrom'     => 'date',
-             'dateTo'       => 'date',
-             'sortBy'       => Rule::in(['price']),
-             'sortOrder'    => Rule::in(['asc' .'desc']),
-         ],[
-             'sortBy' => "The 'sortBy' parameter accepts only 'price' value",
-             'sortOrder' => "The 'sortOrder' parameter accepts only 'asc' pr 'desc' value",
-         ]);
-
           $tours =  $travel->tours()
               ->when($request->priceFrom, function ($query) use ($request) {
                   $query->where('price', '>=', $request->priceFrom * 100);
@@ -37,6 +25,11 @@ class TourController extends Controller
               ->when($request->dateTo, function ($query) use ($request) {
                   $query->where('starting_date', '<=', $request->dateTo);
               })
+
+              ->when($request->sortBy && $request->sortOrder, function ($query) use ($request) {
+                  $query->orderBy($request->sortBy, $request->sortOrder);
+              })
+
               ->orderBy('starting_date')
               ->paginate();
 

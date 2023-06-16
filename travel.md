@@ -170,16 +170,22 @@
 
 
 ## Tours Filtering and Ordering
+         http://travel-api.test/api/v1/travels/some-thing/tours?priceFrom=123&priceTo=456&dateFrom=2023-06-01&dateTo=2023-07-01
+         http://travel-api.test/api/v1/travels/some-thing/tours?dateFrom=2023-06-19&dateTo=2023-07-01&priceFrom=99&priceTo=50&sortBy=price&sortOrder=asc
+
     - Open the  TourController
-    - Form Validation class
+    - Form Validation class 
         php artisan make:request ToursListRequest
-    - 
-        http://travel-api.test/api/v1/travels/some-thing/tours?priceFrom=123&priceTo=456&dateFrom=2023-06-01&dateTo=2023-07-01
-        http://travel-api.test/api/v1/travels/some-thing/tours?priceFrom=123&priceTo=456&dateFrom=2023-06-01&dateTo=2023-07-01&priceFrom=99&priceTo=150&sortBy=price&sortOrder=random
+              $request->validate([
+             'priceFrom'    => 'numeric',
+             'priceTo'      => 'numeric',
+             'dateFrom'     => 'date',
+             'dateTo'       => 'date',
+             'sortBy'       => Rule::in(['price']),
+             'sortOrder'    => Rule::in(['asc' .'desc']),
+         ],[
+             'sortBy' => "The 'sortBy' parameter accepts only 'price' value",
+             'sortOrder' => "The 'sortOrder' parameter accepts only 'asc' pr 'desc' value",
+         ]);
+
         
-
-                    
-
-        
-
-    
