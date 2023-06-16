@@ -226,6 +226,12 @@
         php artisan make:test LoginTest
         php artisan make:test AdminTest
 
+## Editor Endpoint to Update Travel
+    - add the update method in Admin/TravelController
+    - add the route api for update travels
+    - Test api
+    -WWrite the test  in 
+
 
 
 

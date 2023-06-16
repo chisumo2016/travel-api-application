@@ -25,9 +25,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('travels', [TravelController::class, 'index']);
 Route::get('travels/{travels:slug}/tours', [TourController::class, 'index']);// child record of tour or  nested  api/v1/travels/[travels.id]/tours
 
-Route::prefix('admin')->middleware(['auth:sanctum','role:admin'])->group(function () {
+Route::prefix('admin')->middleware(['auth:sanctum'])->group(function () {
+    Route::middleware('role:admin')->group(function (){
+        Route::post('travels', [Admin\TravelController::class, 'store']);
+    });
 
-    Route::post('travels', [Admin\TravelController::class, 'store']);
+    Route::put('travels/{travel}', [\App\Http\Controllers\Api\V1\Admin\TravelController::class, 'update']);
 });
 
 Route::post('login', LoginController::class);
+
