@@ -47,6 +47,11 @@ class Travel extends Model
         );
     }
 
+//    public  function getNumberOfNightsAttribute()
+//    {
+//        return $this->number_of_days - 1;
+//    }
+
 //    public  function  getRouteKeyName(): string
 //    {
 //        return 'slug';

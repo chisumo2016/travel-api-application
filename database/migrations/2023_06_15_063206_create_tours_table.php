@@ -14,9 +14,10 @@ return new class extends Migration
         Schema::create('tours', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('travel_id')->constrained('travels');
+
             $table->string('name');
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('starting_date');
+            $table->date('ending_date');
             $table->integer('price');
             $table->timestamps();
         });
