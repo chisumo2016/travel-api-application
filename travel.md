@@ -188,4 +188,38 @@
              'sortOrder' => "The 'sortOrder' parameter accepts only 'asc' pr 'desc' value",
          ]);
 
-        
+## Artisan Command to Create Users
+    - Creeate User Command 
+        php artisan make:command CreateUserCommand
+    - Create RoleSeeder
+        php artisan make:seeder RoleSeeder
+    - Launch
+        php artisan db:seed --class=RoleSeeder
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
