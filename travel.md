@@ -226,6 +226,16 @@
         php artisan make:test LoginTest
         php artisan make:test AdminTest
 
+## Admin Endpoint to Create Tour
+    - create the admin tour controller
+        php artisan make:controller Api/V1/Admin/TourController
+    - Generate the form request
+        php artisan make:request TourRequest
+    - Add the logic inside the TourController
+    - Add the logic of TourRequest
+    - Add the route api
+    - write test
+            php artisan make:test AdminTourTest
 ## Editor Endpoint to Update Travel
     - add the update method in Admin/TravelController
     - add the route api for update travels
@@ -234,7 +244,9 @@
 
 
 
-
+## API DOCUMENTATION
+         Generating API Documentation with OpenAPI/Swagger
+        https://blog.quickadminpanel.com/laravel-api-documentation-with-openapiswagger/
 
 
 

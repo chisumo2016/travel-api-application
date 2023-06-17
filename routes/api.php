@@ -26,8 +26,10 @@ Route::get('travels', [TravelController::class, 'index']);
 Route::get('travels/{travels:slug}/tours', [TourController::class, 'index']);// child record of tour or  nested  api/v1/travels/[travels.id]/tours
 
 Route::prefix('admin')->middleware(['auth:sanctum'])->group(function () {
+
     Route::middleware('role:admin')->group(function (){
         Route::post('travels', [Admin\TravelController::class, 'store']);
+        Route::post('travels/{travel}/tours', [Admin\TourController::class, 'store']);
     });
 
     Route::put('travels/{travel}', [\App\Http\Controllers\Api\V1\Admin\TravelController::class, 'update']);
@@ -35,3 +37,4 @@ Route::prefix('admin')->middleware(['auth:sanctum'])->group(function () {
 
 Route::post('login', LoginController::class);
 
+//996c2b24-9db6-4155-beac-8f1d858fbfe7
